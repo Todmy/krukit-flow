@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+*.log
+
+# internal-only artifacts — not shipped in the public tree
+skills/**/DESIGN.md
+skills/**/IMPROVE-LOG.md
