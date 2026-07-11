@@ -57,7 +57,7 @@ Stage 5 of 7 in the krukit pipeline: recon → grill → design → plan → act
 
 6. **Commit per task.** One small, discrete commit per completed task — single logical change each. Never push to remote without explicit user permission.
 
-7. **Accumulate learnings** (only when the task list has more than one task — a single-task fix skips Learnings). After each completed task, if a codebase gotcha was discovered (quirky API, hidden coupling, surprising test setup), append it as one line to a `## Learnings` section at the bottom of plan.md and include that section in every subsequent task's context — later tasks must not re-debug the same quirks. Append-only, dies with the feature.
+7. **Accumulate learnings** (only when the task list has more than one task — a single-task fix skips Learnings). After each completed task, if a codebase gotcha was discovered (quirky API, hidden coupling, surprising test setup), append it as one line to a `## Learnings` section — at the bottom of plan.md (full route) or under `## Act — inline task list` in flow-state.md (fix route, which has no plan.md) — and include that section in every subsequent task's context — later tasks must not re-debug the same quirks. Append-only, dies with the feature.
 
 8. **Finish.** Tick every completed task checkbox (plan.md on the full route, the inline list on the fix route). Run the FULL test suite and read the actual output — do not infer success from a subagent's claim.
 
@@ -80,7 +80,7 @@ All of these MUST be true before the stage is complete:
 - [ ] Every task ticked — in plan.md (full route) or in the inline task list (fix route).
 - [ ] Full test suite was run and is passing — actual output read, not assumed.
 - [ ] One commit per task exists; nothing pushed without permission.
-- [ ] If codebase gotchas were found during execution, the `## Learnings` section exists in plan.md.
+- [ ] If codebase gotchas were found during execution AND the task list has more than one task, the `## Learnings` section exists (plan.md on the full route, flow-state.md on the fix route).
 
 After the items above pass, tick row 5 in flow-state.md (step 9) — the tick is the post-gate action, not a gate condition.
 
