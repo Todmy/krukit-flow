@@ -9,7 +9,7 @@ Orchestrator of the 7-stage krukit pipeline: recon → grill → design → plan
 
 ## Invariants (all routes)
 
-The Layer-0 floor. These hold on EVERY route — trivial, fix, full, external-spec — and during any inspection done before routing. The constitution may extend them; its absence never disables them.
+The Layer-0 floor. These hold on EVERY route — trivial, direct, fix, full, external-spec — and during any inspection done before routing. The constitution may extend them; its absence never disables them.
 
 - **Snapshot before touch.** Irrecoverable mutable state (DB files and their journals/WAL, logs, state files — anything a tool can rewrite on open) → copy first, inspect the copy; read-only tools before stateful ones; NEVER batch read-only inspection and a stateful tool in one command over such state. A guardrail counts only if it fires before the first careless command.
 - **Deliverable gate.** The flow may not end while the task's declared observable deliverable is missing. Produce it best-effort from verified data ONLY — never fabricate content to fill gaps; state the gaps explicitly in the artifact instead. Unexplained completeness (data present that should not have been recoverable) is a defect to investigate, not a success.
@@ -33,18 +33,19 @@ When no human can answer mid-run (headless / one-shot session, CI, benchmark) or
    - Resume point = the first row that is not ticked (done and skipped rows are both ticked `- [x]`).
    - On resume: read Route from the flow-state header — do not re-ask; recreate todos for the remaining stages; skip to step 5 at the resume point.
    - On declined resume: confirm, then overwrite flow-state.md and start over.
-2. **Stage 0 — Route.** Classify the task with the user: one question via the `AskUserQuestion` tool (arrow-key form). Options = the four routes below, your recommended route FIRST with the label ending "(Recommended)" and the reason in its description. If invoked without a task description, derive the likely candidate task(s) from session context / the tracker FIRST and fold them into this SAME question (name the recommended candidate in the route-option descriptions, or ask one combined task+route question) — never spend a separate AskUserQuestion round on task selection alone.
+2. **Stage 0 — Route.** Classify the task with the user: one question via the `AskUserQuestion` tool (arrow-key form). Options = the five routes below, your recommended route FIRST with the label ending "(Recommended)" and the reason in its description. If invoked without a task description, derive the likely candidate task(s) from session context / the tracker FIRST and fold them into this SAME question (name the recommended candidate in the route-option descriptions, or ask one combined task+route question) — never spend a separate AskUserQuestion round on task selection alone.
 
    | Route | When | Stages |
    |---|---|---|
-   | trivial | typo/config/one obvious file | no pipeline — do it + run the relevant test; no artifacts, no flow-state |
+   | trivial | typo/config/one obvious file | no pipeline — do it + run the relevant test; no artifacts, no flow-state; log the route |
+   | direct | task is NOT feature work — forensics/recovery, ops/investigation, puzzle/algorithmic one-off — pipeline stages don't fit regardless of size | no pipeline — do the work directly, verify against the task's own success criteria; Layer-0 invariants apply; log the route |
    | fix | small well-scoped change (bugfix or tiny feature), behavior known | 5 act (TDD) → 6 verify |
    | full | feature or change in existing code | 1→7 all stages |
    | external-spec | big greenfield where the spec is a human deliverable in Git | recommend spec-kit/OpenSpec, explain why, stop |
 
    **Discovery escape hatch:** if no confirmed `discovery.md` exists and the user cannot state what the result is or how they would validate it, recommend `krukit-discovery` first (invoke it via the Skill tool on agreement, passing the already-confirmed feature slug so discovery.md lands in this feature's folder), then return here and route with `discovery.md` as the task description — routing a task without a known "what" only launders ambiguity into the pipeline.
 
-   **Routing with a confirmed discovery.md:** its Handoff route is the recommended option. The minimum route is fix — krukit-verify must execute the Validation plan; offer trivial only with the explicit caveat that the Validation plan then runs inline as the route's "relevant test" and its results are reported. If its Open questions section is non-empty, recommend full.
+   **Routing with a confirmed discovery.md:** its Handoff route is the recommended option. The minimum route is fix — `direct` is not offered (confirmed discovery output is feature work by definition), and krukit-verify must execute the Validation plan; offer trivial only with the explicit caveat that the Validation plan then runs inline as the route's "relevant test" and its results are reported. If its Open questions section is non-empty, recommend full.
 
 3. **Create flow-state** (full and fix routes only). Write `docs/krukit/<feature-slug>/flow-state.md` with Route set to the single chosen route:
 
@@ -82,7 +83,7 @@ When no human can answer mid-run (headless / one-shot session, CI, benchmark) or
 
 ## Gate
 
-- [ ] Route chosen; recorded in flow-state.md for full and fix routes (trivial and external-spec produce no flow-state by design).
+- [ ] Route chosen; recorded in flow-state.md for full and fix routes (trivial, direct, and external-spec produce no flow-state by design).
 - [ ] Full route: all seven stages ticked (done or skipped).
 - [ ] Fix route: act and verify ticked.
 - [ ] Final summary lists the artifacts produced.
