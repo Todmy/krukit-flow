@@ -6,9 +6,14 @@ A disciplined, brownfield-first feature pipeline for Claude Code: **recon → gr
 
 ## What it is
 
-`krukit-flow` routes a task (trivial / fix / full / external-spec), then runs the stage skills in order — enforcing each stage's gate, recording state in `flow-state.md`, and supporting resume and per-stage skips. The orchestrator and the recon stage are original; the connective tissue (constitution, reopen-rule, verbatim gate-evidence, trace-driven `krukit-improve`) is what differentiates it from a plain command chain.
+`krukit-flow` routes a task (trivial / direct / fix / full / external-spec), then runs the stage skills in order — enforcing each stage's gate, recording state in `flow-state.md`, and supporting resume and per-stage skips. The orchestrator and the recon stage are original; the connective tissue (constitution, reopen-rule, verbatim gate-evidence, trace-driven `krukit-improve`) is what differentiates it from a plain command chain.
 
-The design was hardened against **12 validated pain points** mined from the GitHub issue trackers of six competing workflow tools (spec-kit, superpowers, OpenSpec, BMAD, Taskmaster, GSD) — e.g. the #1 cross-tool pain (one-way pipeline with no sanctioned backward path) is addressed by the reopen rule.
+The design was hardened against **12 pain points** collected from the public GitHub issue trackers of six workflow tools (spec-kit, superpowers, OpenSpec, BMAD, Taskmaster, GSD) in June 2026 — e.g. the most-reacted pain in that collection (one-way pipeline with no sanctioned backward path) is addressed by the reopen rule.
+
+## Requirements
+
+- **Model:** the `full` route needs a Sonnet-class or stronger model. Below that bar the router caps the route at `fix` in autonomous runs and warns in interactive ones — weaker models demonstrably misroute and rubber-stamp verification.
+- **Harness:** a skills-capable Claude Code (or compatible) harness with arrow-key questions (`AskUserQuestion`) for interactive gates. Headless runs use autonomous mode (see krukit-flow).
 
 ## Skills
 
@@ -34,13 +39,13 @@ Krukit exists because of tools I used heavily and genuinely rate:
 - **[superpowers](https://github.com/obra/superpowers)** by Jesse Vincent — a deep, composable library of engineering-discipline skills: brainstorming, TDD, systematic debugging, verification, code review.
 - **[Matt Pocock's skills](https://github.com/mattpocock/skills)** — sharp interrogation methodology (grill-with-docs) for pressure-testing a plan before you build it.
 
-All three are excellent and worth your time. I ran real features through them, then went and read what people actually complain about in their issue trackers — and tried to build something **simpler to use, clearer to follow, and lighter to run**, while keeping the discipline that makes those tools good.
+All three are excellent and worth your time. I ran real features through them, then went and read what people actually complain about in their issue trackers — and built around what those complaints point at: **one orchestrator plus stage skills that each fit in a single read — no separate CLI, no template pack, no config surface** — while keeping the discipline that makes those tools good.
 
 ### What people keep running into
 
-Pains validated across the issue trackers of six workflow tools (Spec Kit, superpowers, OpenSpec, BMAD, Taskmaster, GSD):
+Pains collected from the public issue trackers of six workflow tools (Spec Kit, superpowers, OpenSpec, BMAD, Taskmaster, GSD), June 2026:
 
-- **One-way pipeline.** Once you're implementing, there's no sanctioned way back when the work proves the design wrong. The single most-reacted pain across every tool.
+- **One-way pipeline.** Once you're implementing, there's no sanctioned way back when the work proves the design wrong. The most-reacted pain in that collection.
 - **No grounding in the existing code.** Specs and clarifying questions get written without reading the repo, so brownfield assumptions slip straight through to implementation.
 - **Capped, code-blind clarification.** A fixed question limit, and no look at the actual source behind the answers.
 - **No feedback loop.** Artifacts freeze at planning time; what you learn while building never flows back into the design.
