@@ -67,7 +67,7 @@ One SHOULD sentence in step 2: *when an exact oracle exists (byte-identical diff
 
 1. Lint route-consistency check: RED on current tree (README enumeration lacks `direct`) → GREEN after edits.
 2. Existing flow-states (wave1, wave2) still parse: resume semantics unaffected (P4) — checked by re-reading with the updated instructions.
-3. Bench (stage 6, krukit-v2 re-vendor): (i) cobol-modernization fix-route cost ≤ 2× baseline ($0.48 → ≤ $0.96-1.00); (ii) hard-pair password-recovery + write-compressor: route-log line exists with direct/trivial, no pipeline ceremony in trace, Layer-0 honored; (iii) optional if budget allows: haiku cobol — route-log shows `(cap: below-bar)`, no full route.
+3. Bench (stage 6, krukit-v2 re-vendor): (i) cobol-modernization fix-route cost ≤ 2× baseline ($0.48 → ≤ $0.96-1.00) [amended 2026-07-11 during verify: measured post-diet floor is 4.0× (3 SKILL.md loads + TDD + evidence-verify); revised exit ≤4.2×, the ≤2× target moves to Wave 4 (fresh-context subagents / slim stage variants) — user-accepted, original target preserved]; (ii) hard-pair password-recovery + write-compressor: route-log line exists with direct/trivial, no pipeline ceremony in trace, Layer-0 honored; (iii) optional if budget allows: haiku cobol — route-log shows `(cap: below-bar)`, no full route.
 
 ## Definition of Done
 
