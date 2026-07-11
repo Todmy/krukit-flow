@@ -37,7 +37,7 @@ When no human can answer mid-run (headless / one-shot session, CI, benchmark) or
 
    | Route | When | Stages |
    |---|---|---|
-   | trivial | typo/config/one obvious file | no pipeline — do it + run the relevant test; no artifacts, no flow-state; log the route |
+   | trivial | typo/config/one obvious file | no pipeline — do it + run the relevant test; no artifacts, no flow-state (route-log line only) |
    | direct | task is NOT feature work — forensics/recovery, ops/investigation, puzzle/algorithmic one-off — pipeline stages don't fit regardless of size | no pipeline — do the work directly, verify against the task's own success criteria; Layer-0 invariants apply; log the route |
    | fix | small well-scoped change (bugfix or tiny feature), behavior known | 5 act (TDD) → 6 verify |
    | full | feature or change in existing code | 1→7 all stages |
