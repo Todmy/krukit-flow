@@ -7,6 +7,13 @@ description: Orchestrates the full krukit feature pipeline end-to-end with task 
 
 Orchestrator of the 7-stage krukit pipeline: recon → grill → design → plan → act → verify → review. It routes the task, then runs the stage skills in order, enforcing each stage's gate, recording state in flow-state.md, and supporting resume and per-stage skips. Stage skills own their own process and gates; this skill only sequences and records. Interact with the user in the user's language.
 
+## Invariants (all routes)
+
+The Layer-0 floor. These hold on EVERY route — trivial, fix, full, external-spec — and during any inspection done before routing. The constitution may extend them; its absence never disables them.
+
+- **Snapshot before touch.** Irrecoverable mutable state (DB files and their journals/WAL, logs, state files — anything a tool can rewrite on open) → copy first, inspect the copy; read-only tools before stateful ones; NEVER batch read-only inspection and a stateful tool in one command over such state. A guardrail counts only if it fires before the first careless command.
+- **Deliverable gate.** The flow may not end while the task's declared observable deliverable is missing. Produce it best-effort from verified data ONLY — never fabricate content to fill gaps; state the gaps explicitly in the artifact instead. Unexplained completeness (data present that should not have been recoverable) is a defect to investigate, not a success.
+
 ## Inputs
 
 - A task description (feature, bugfix, or change) from the user.

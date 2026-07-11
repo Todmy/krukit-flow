@@ -62,6 +62,10 @@ for skill_md in sorted(SKILLS.glob("*/SKILL.md")):
         if not (skill_md.parent / ref).exists():
             err(skill_md, f"referenced path does not exist: {ref}")
 
+    # Layer-0 floor must never silently vanish from the orchestrator
+    if skill_md.parent.name == "krukit-flow" and "## Invariants (all routes)" not in text:
+        err(skill_md, "missing Layer-0 preamble section '## Invariants (all routes)'")
+
 if errors:
     print("\n".join(errors))
     print(f"\nFAIL: {len(errors)} issue(s) in {checked} skills")
