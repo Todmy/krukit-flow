@@ -47,6 +47,10 @@ When no human can answer mid-run (headless / one-shot session, CI, benchmark) or
 
    **Routing with a confirmed discovery.md:** its Handoff route is the recommended option. The minimum route is fix — `direct` is not offered (confirmed discovery output is feature work by definition), and krukit-verify must execute the Validation plan; offer trivial only with the explicit caveat that the Validation plan then runs inline as the route's "relevant test" and its results are reported. If its Open questions section is non-empty, recommend full.
 
+   **Capability cap:** before presenting routes, read the model name the harness declares (system prompt / environment) — NEVER ask the model to assess its own capability. Below Sonnet-class (Haiku-class or unknown lightweight tier): in autonomous mode cap the route at `fix` — `full` is neither offered nor chosen, and the route-log reason notes `(cap: below-bar)`; in interactive mode keep `full` visible with an explicit warning in its description — the user's explicit pick is an override, logged as `full (override: below-bar)`. Unknown model name: autonomous → treat as below-bar; interactive → say "tier unknown" in the warning.
+
+   **Route log:** record EVERY Stage-0 decision (all five routes) as one appended line in `docs/krukit/route-log.md` (create on first use, append-only): `YYYY-MM-DD | <task one-liner> | <route> | <reason>`. Telemetry only — nothing reads it for state; if the write fails, note it and continue.
+
 3. **Create flow-state** (full and fix routes only). Write `docs/krukit/<feature-slug>/flow-state.md` with Route set to the single chosen route:
 
    ```markdown
