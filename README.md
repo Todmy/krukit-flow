@@ -12,7 +12,7 @@ The design was hardened against **12 pain points** collected from the public Git
 
 ## Requirements
 
-- **Model:** the `full` route needs a Sonnet-class or stronger model. Below that bar the router caps the route at `fix` in autonomous runs and warns in interactive ones — weaker models demonstrably misroute and rubber-stamp verification.
+- **Model:** the `full` route needs a Sonnet-class or stronger model. Below that bar the router caps the route at `fix` in autonomous runs and warns in interactive ones — weaker models misroute and rubber-stamp verification in our bench traces.
 - **Harness:** a skills-capable Claude Code (or compatible) harness with arrow-key questions (`AskUserQuestion`) for interactive gates. Headless runs use autonomous mode (see krukit-flow).
 
 ## Skills
@@ -43,7 +43,7 @@ All three are excellent and worth your time. I ran real features through them, t
 
 ### What people keep running into
 
-Pains collected from the public issue trackers of six workflow tools (Spec Kit, superpowers, OpenSpec, BMAD, Taskmaster, GSD), June 2026:
+Pains collected from the public issue trackers of six workflow tools (spec-kit, superpowers, OpenSpec, BMAD, Taskmaster, GSD), June 2026:
 
 - **One-way pipeline.** Once you're implementing, there's no sanctioned way back when the work proves the design wrong. The most-reacted pain in that collection.
 - **No grounding in the existing code.** Specs and clarifying questions get written without reading the repo, so brownfield assumptions slip straight through to implementation.
