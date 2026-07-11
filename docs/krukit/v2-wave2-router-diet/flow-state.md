@@ -5,7 +5,7 @@ Task: Wave 2 of HARNESS-IMPROVEMENTS-DRAFT v2 plan — (a) route table v2: `dire
 - [x] 2 grill — done 2026-07-11, artifact: flow-state.md
 - [x] 3 design — done 2026-07-11, artifact: design.md
 - [x] 4 plan — done 2026-07-11, artifact: plan.md
-- [ ] 5 act
+- [x] 5 act — done 2026-07-11, artifact: plan.md (7 tasks, commits 96bb4c0..+README)
 - [ ] 6 verify
 - [ ] 7 review
 
