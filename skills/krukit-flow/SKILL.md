@@ -20,7 +20,7 @@ When no human can answer mid-run (headless / one-shot session, CI, benchmark) or
 
 - **Gates become logged checkpoints.** At every user-facing gate, choose the recommended option, record it, and proceed — never stop to wait for a reply that cannot come.
 - **Questions are forbidden until the deliverable exists.** In a one-shot session, asking IS termination — dying with an open question violates the deliverable gate above. Only after the declared deliverable exists may a question be raised, as a last resort.
-- **Auto-answers are logged, never disguised.** Evidence line format in flow-state.md: `> [auto-answer] <gate>: <chosen default> — <one-line reason> — YYYY-MM-DD`. This is the ONLY valid gate evidence in autonomous mode; writing it as if a user replied remains structurally invalid (step 8's audit rule: no fabricated user quotes, ever).
+- **Auto-answers are logged, never disguised.** Evidence line format in flow-state.md: `> [auto-answer] <gate>: <chosen default> — <one-line reason> — YYYY-MM-DD`. This is the ONLY valid gate evidence in autonomous mode; writing it as if a user replied remains structurally invalid (step 7's audit rule: no fabricated user quotes, ever).
 
 - A task description (feature, bugfix, or change) from the user.
 - A feature slug — short kebab-case name; derive and confirm one if not given.
@@ -31,7 +31,7 @@ When no human can answer mid-run (headless / one-shot session, CI, benchmark) or
 
 1. **Resume check.** If `docs/krukit/<feature-slug>/flow-state.md` exists with unticked boxes:
    - Resume point = the first row that is not ticked (done and skipped rows are both ticked `- [x]`).
-   - On resume: read Route from the flow-state header — do not re-ask; recreate todos for the remaining stages; skip to step 5 at the resume point.
+   - On resume: read Route from the flow-state header — do not re-ask; re-read the remaining flow-state rows; skip to step 5 at the resume point.
    - On declined resume: confirm, then overwrite flow-state.md and start over.
 2. **Stage 0 — Route.** Classify the task with the user: one question via the `AskUserQuestion` tool (arrow-key form). Options = the five routes below, your recommended route FIRST with the label ending "(Recommended)" and the reason in its description. If invoked without a task description, derive the likely candidate task(s) from session context / the tracker FIRST and fold them into this SAME question (name the recommended candidate in the route-option descriptions, or ask one combined task+route question) — never spend a separate AskUserQuestion round on task selection alone.
 
@@ -69,15 +69,14 @@ When no human can answer mid-run (headless / one-shot session, CI, benchmark) or
    For the fix route, mark rows 1–4 and 7 as `- [x] N <stage> — skipped (route) YYYY-MM-DD`. When a confirmed discovery.md exists, append ` | Discovery: discovery.md` to the header line — the binding is recorded, not assumed.
 4. **Constitution — open** (full route only): invoke `krukit-rules` in open mode. Existing constitution → one-line load report, move on. None (first run) → it offers a grilled setup interview; on decline, note it and continue (stages 3 and 6 will record the absence).
 
-5. **Todos.** TodoWrite: one todo per stage in the route; mark in_progress/completed as you go.
-6. **Run stages in order** via the Skill tool, exact names: `krukit-recon` → `krukit-grill` → `krukit-design` → `krukit-plan` → `krukit-act` → `krukit-verify` → `krukit-review`. Fix route runs only `krukit-act` → `krukit-verify`.
-7. **Between stages:** confirm the stage's gate passed and the stage ticked its row as `- [x] N <stage> — done YYYY-MM-DD, artifact: <file>`; report a 2-3 line stage summary; update the todo. If a gate fails, say what failed and stop — do not silently proceed.
+5. **Run stages in order** via the Skill tool, exact names: `krukit-recon` → `krukit-grill` → `krukit-design` → `krukit-plan` → `krukit-act` → `krukit-verify` → `krukit-review`. Fix route runs only `krukit-act` → `krukit-verify`.
+6. **Between stages:** confirm the stage's gate passed and the stage ticked its row as `- [x] N <stage> — done YYYY-MM-DD, artifact: <file>`; report a 2-3 line stage summary. If a gate fails, say what failed and stop — do not silently proceed.
    - **Reopen:** if krukit-verify unticks earlier rows as `— reopened YYYY-MM-DD (<reason>) [was: <previous marker>]`, resume from the first reopened stage (same rule as step 1: first row not ticked). The `[was: ...]` part preserves the row's prior done/skipped annotation.
    - **Context resets:** on long features, stage boundaries are safe reset points — suggest `/clear` and re-invoking krukit-flow for the slug; flow-state makes the reset lossless.
-8. **User-facing gates** — grill completion (stage 2), design approval (stage 3), HIGH-finding acceptance (stage 6) — wait for the user. Never self-approve. **Audit rule:** record the user's verbatim reply in flow-state.md as quoted gate evidence (`> "<reply>" — YYYY-MM-DD`); if there is no quotable user message, the gate has NOT passed — a phantom or self-generated answer is structurally invalid. Sole exception: autonomous mode, where the explicitly-marked `[auto-answer]` line is the valid evidence form (see ## Autonomous mode). For gates resolved inside a delegated stage skill (grill completion, design approval), quote the user's reply from that stage's session; if flow itself saw no direct reply, the evidence line is the stage's gate-pass marker: `> [stage N gate passed, artifact: <file>] — YYYY-MM-DD`.
-9. **Skips.** When the user says "skip <stage>", mark that row `- [x] N <stage> — skipped (user) YYYY-MM-DD` and continue. Gates that depend on a skipped artifact degrade gracefully: note the missing input, do not fail.
-10. **Constitution — close** (full route only): invoke `krukit-rules` in close mode — it distills at most one constitution-grade principle from the feature trail and proposes it. "No amendment this time" is a normal outcome.
-11. **Finish.** Final summary listing all artifacts produced in `docs/krukit/<feature-slug>/`.
+7. **User-facing gates** — grill completion (stage 2), design approval (stage 3), HIGH-finding acceptance (stage 6) — wait for the user. Never self-approve. **Audit rule:** record the user's verbatim reply in flow-state.md as quoted gate evidence (`> "<reply>" — YYYY-MM-DD`); if there is no quotable user message, the gate has NOT passed — a phantom or self-generated answer is structurally invalid. Sole exception: autonomous mode, where the explicitly-marked `[auto-answer]` line is the valid evidence form (see ## Autonomous mode). For gates resolved inside a delegated stage skill (grill completion, design approval), quote the user's reply from that stage's session; if flow itself saw no direct reply, the evidence line is the stage's gate-pass marker: `> [stage N gate passed, artifact: <file>] — YYYY-MM-DD`.
+8. **Skips.** When the user says "skip <stage>", mark that row `- [x] N <stage> — skipped (user) YYYY-MM-DD` and continue. Gates that depend on a skipped artifact degrade gracefully: note the missing input, do not fail.
+9. **Constitution — close** (full route only): invoke `krukit-rules` in close mode — it distills at most one constitution-grade principle from the feature trail and proposes it. "No amendment this time" is a normal outcome.
+10. **Finish.** Final summary listing all artifacts produced in `docs/krukit/<feature-slug>/`.
 
 ## Outputs
 
