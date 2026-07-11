@@ -3,7 +3,7 @@ Started: 2026-07-11 | Route: full
 Task: Wave 2 of HARNESS-IMPROVEMENTS-DRAFT v2 plan — (a) route table v2: `direct` route for task-TYPE mismatch + capability self-check at Stage 0 + README minimum-capability bar (item 12a,b); (b) cost diet: bookkeeping batching, artifact-once-per-stage, verify depth by risk, slim fix-route instructions (item 10, target fix ≤ 2× baseline). Spec: HARNESS-IMPROVEMENTS-DRAFT.md "Synthesis & v2 architecture".
 - [x] 1 recon — done 2026-07-11, artifact: context.md
 - [x] 2 grill — done 2026-07-11, artifact: flow-state.md
-- [ ] 3 design
+- [x] 3 design — done 2026-07-11, artifact: design.md
 - [ ] 4 plan
 - [ ] 5 act
 - [ ] 6 verify
@@ -35,3 +35,6 @@ Sharpened terms → CONTEXT.md created (glossary: route, direct, trivial, route-
 ADRs: none — no decision met all three bar criteria (hard-to-reverse + surprising + real trade-off).
 Deferred: full verify risk-matrix → Wave 4 (P6: needs recurring pattern across distinct tasks).
 Process note (trace for krukit-improve): grill's "one question per turn" was consciously batched into 2 rounds of 3+2 — approval-fatigue evidence (item 11); candidate edit for krukit-grill.
+
+Design gate evidence:
+> "Затвердити (Recommended)" — 2026-07-11
