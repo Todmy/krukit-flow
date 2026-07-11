@@ -76,9 +76,11 @@ inv_m = re.search(r"EVERY route — ([^—]+) —", flow_text)
 inv_routes = {r.strip() for r in inv_m.group(1).split(",")} if inv_m else set()
 rdm_m = re.search(r"routes a task \(([^)]+)\)", readme_text)
 rdm_routes = {r.strip() for r in rdm_m.group(1).split("/")} if rdm_m else set()
-if not (table_routes == inv_routes == rdm_routes):
-    errors.append("route-name drift: table=%s invariants=%s readme=%s" % (
-        sorted(table_routes), sorted(inv_routes), sorted(rdm_routes)))
+for label, s in (("flow table", table_routes), ("invariants enumeration", inv_routes), ("README enumeration", rdm_routes)):
+    if not s:
+        errors.append(f"route-name source went regex-dark (reworded?): {label} matched nothing")
+if table_routes and inv_routes and rdm_routes and not (table_routes == inv_routes == rdm_routes):
+    errors.append(f"route-name drift: table={sorted(table_routes)} invariants={sorted(inv_routes)} readme={sorted(rdm_routes)}")
 
 if errors:
     print("\n".join(errors))
