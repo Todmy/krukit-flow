@@ -7,7 +7,7 @@ Task: Wave 2 of HARNESS-IMPROVEMENTS-DRAFT v2 plan — (a) route table v2: `dire
 - [x] 4 plan — done 2026-07-11, artifact: plan.md
 - [x] 5 act — done 2026-07-11, artifact: plan.md (7 tasks, commits 96bb4c0..+README)
 - [x] 6 verify — done 2026-07-11, artifact: verify.md
-- [ ] 7 review
+- [x] 7 review — done 2026-07-11, artifact: flow-state.md
 
 Route gate evidence:
 > "full (Recommended)" — 2026-07-11
@@ -38,3 +38,15 @@ Process note (trace for krukit-improve): grill's "one question per turn" was con
 
 Design gate evidence:
 > "Затвердити (Recommended)" — 2026-07-11
+
+## Review summary (2026-07-11)
+
+Independent fresh-context review of diff 9c9f5bf..HEAD: 0 Critical, 2 Important, 8 Minor.
+- Fixed (4 commits 377670e..38c0cc6): Important-1 act Learnings gate contradiction + fix-route Learnings home; Important-2 README uncited "demonstrably" + Minor-10 casing; Minors 3/5/6 glossary term+override, IMPROVE-LOG renumbering note, trivial-cell wording; Minor-4 lint regex-dark fail-loud.
+- Declined with reasons: Minor-7 (autonomous evidence for artifactless routes — route-log line IS the designed evidence home; revisit with the V2 telemetry candidate); Minor-8 (hardcoded "five routes" counts — adjacent to the table they describe, low drift risk, P2/P6 against a lint knob now); Minor-9 (list-revision-across-boundary edge in the merged round — no trace of it occurring, P6; persist-first re-confirmation handles it naturally).
+- Branch outcome: all work on main by session convention (private repo, user-observed); nothing pushed. No worktrees created.
+- Knowledge capture: no .valis.json in repo — Valis skipped; durable lessons routed to IMPROVE-LOGs instead (grill question-batching deviation; act fresh-context threshold by task SIZE not count — both recorded as candidates in this flow's trace).
+
+## Constitution close (2026-07-11)
+
+No amendment this time. Candidates considered and routed elsewhere: "telemetry is never state" (corollary of P4, would duplicate); "batch questions at stage boundaries" (skill-level improvement for krukit-grill/design, not project-wide); "fresh-context threshold by task size" (krukit-act IMPROVE-LOG candidate). Constitution stays at v1.0.0.
