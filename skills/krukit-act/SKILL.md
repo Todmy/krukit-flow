@@ -22,6 +22,7 @@ Stage 5 of 7 in the krukit pipeline: recon → grill → design → plan → act
    ```markdown
    # Krukit Flow: <feature-slug>
    Started: YYYY-MM-DD | Route: full
+   Task: <one-line description + issue ref>
    - [ ] 1 recon
    - [ ] 2 grill
    - [ ] 3 design
