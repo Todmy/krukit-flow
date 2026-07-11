@@ -68,6 +68,18 @@ for skill_md in sorted(SKILLS.glob("*/SKILL.md")):
             if section not in text:
                 err(skill_md, f"missing pinned section '{section}'")
 
+# route-name consistency: flow route table == Invariants enumeration == README enumeration
+flow_text = (SKILLS / "krukit-flow" / "SKILL.md").read_text()
+readme_text = (ROOT / "README.md").read_text()
+table_routes = set(re.findall(r"^\s*\|\s*([a-z][a-z-]*)\s*\|", flow_text, re.M))
+inv_m = re.search(r"EVERY route — ([^—]+) —", flow_text)
+inv_routes = {r.strip() for r in inv_m.group(1).split(",")} if inv_m else set()
+rdm_m = re.search(r"routes a task \(([^)]+)\)", readme_text)
+rdm_routes = {r.strip() for r in rdm_m.group(1).split("/")} if rdm_m else set()
+if not (table_routes == inv_routes == rdm_routes):
+    errors.append("route-name drift: table=%s invariants=%s readme=%s" % (
+        sorted(table_routes), sorted(inv_routes), sorted(rdm_routes)))
+
 if errors:
     print("\n".join(errors))
     print(f"\nFAIL: {len(errors)} issue(s) in {checked} skills")
