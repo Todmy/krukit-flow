@@ -39,6 +39,8 @@ Metrics: requirements 5 (design DoD) / implemented 5 / findings 4 (0 CRITICAL, 0
 
 **Attribution confound (review finding I-1, recorded 2026-07-13):** v4 is vendored cumulatively at HEAD, so vs v3 (@0f6a63c) it carries not only the deadline gate but also the wave-2 review-close edit to krukit-act/SKILL.md (377670e, Learnings-gate wording). A v3→v4 reward delta is therefore NOT attributable to the deadline gate alone. The specific pre-registered criterion above is largely immune (it keys on timeout-trials materializing a deliverable, which the krukit-act wording doesn't touch), but any broader "v4 beats v3" claim must carry this footnote. Mirrored in krukit-bench vendor/PINS.txt.
 
+**Outcome (recorded 2026-07-13, post-run): FALSIFIED at the trace level.** krukit-v4-r1 was aborted by the user after 3/10 trials, all reward 0.0. password-recovery timed out empty again — its trace shows 0 backgrounded jobs, 0 bounded `timeout` wraps, no early deliverable write: the bullet did not change mid-run behavior at all. torch-tensor-parallelism finished early (12 of 15 min) with an unverified deliverable — no interpreter-install attempt (v3-r2's agent did apt-get + pip), a manual trace passed a bug, and the partial-satisfies-deliverable-gate loophole licensed the exit. write-compressor regressed from stable PASS (over-engineering with no secured baseline). Additional correction: the real agent budget is 900 s, not the ~1 h assumed during design. Mechanistic diagnosis and rework: **deadline-gate-v2** (supersedes this prediction; aborted r1 trials retained as trace material only, not P3 data).
+
 ## Gate
 - [x] Full test suite (lint) ran fresh, output read, passing (exit 0, 11 skills).
 - [x] verify.md exists with findings table + metrics line.
