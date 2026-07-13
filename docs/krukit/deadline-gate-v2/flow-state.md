@@ -6,7 +6,7 @@ Task: Rework Deadline gate from krukit-v4-r1 trace evidence — W1 deadline-plan
 - [x] 3 design — done 2026-07-13, artifact: design.md
 - [x] 4 plan — done 2026-07-13, artifact: plan.md
 - [x] 5 act — done 2026-07-13, artifact: plan.md (T1 red→green T2; T3-T4 committed; T5 uncommitted by design)
-- [ ] 6 verify
+- [x] 6 verify — done 2026-07-13, artifact: verify.md
 - [ ] 7 review
 
 > [auto-answer] Stage-0 route: full — reworks Layer-0 invariant wording (P5, load-bearing) + edits krukit-act/krukit-verify; user approved the W1-W4 plan with "+" but is not steering stage-by-stage (established wave precedent) — 2026-07-13
