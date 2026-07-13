@@ -8,7 +8,7 @@ Date: 2026-07-13 | Route: full | Autonomous | Verified: commits feecfef..632fcc5
 |---|---|---|
 | Full lint green (end state) | `python3 scripts/lint-consistency.py` | `OK: 11 skills checked`, exit 0 |
 | Lint pins red→green (P1/P8) | `git show c12f1f1:*` | @c12f1f1 (RED): all 4 pinned clauses absent from skills, lint carries 3 `deadline-gate-v2` err branches → 4 genuine errors (run output recorded in act); dd6c0c2 turns all green. |
-| Bullet verbatim vs design | Python exact compare | 937 chars both, **identical** — no drift |
+| Bullet verbatim vs design | Python exact compare | 937 chars pre-review; re-proven post-review at 1,118 chars both, **identical** — no drift |
 | W4 clauses placed correctly | substring check | act clause in act only; verify clause in verify only; both match design verbatim |
 | Live immediately | `realpath ~/.claude/skills/krukit-flow` | → repo dir (symlink); live file carries v2 clauses. No sync step (prior-wave Learnings). |
 | Terminology | grep CONTEXT.md | `**deadline gate**` (v2 semantics), `**deadline plan**`, `**baseline-first ladder**` present; old "background the expensive job" phrasing gone |
@@ -34,7 +34,7 @@ All plan paths exist; DoD1→dd6c0c2, DoD2→c12f1f1+dd6c0c2, DoD3→dd6c0c2, Do
 Metrics: requirements 7 (design DoD) / implemented 7 / findings 5 (0 CRITICAL, 0 HIGH, 1 MEDIUM, 4 LOW).
 
 ## Pre-registered prediction (P1/P3 — record BEFORE the run)
-**Setup:** krukit-v5 = krukit skills vendored @ 632fcc5 (pre-review) (re-vendored at final HEAD after review, same as prior waves); run `cd /Users/todmy/github/krukit-bench && make krukit-v5-hard` (one rep; ≥3 reps before any public number, P3).
+**Setup:** krukit-v5 = krukit skills vendored @ 493e5d1 (final HEAD incl. review fixes I-1/I-2/M-2; re-vendored via git archive, rider-free, byte-identical to HEAD); run `cd /Users/todmy/github/krukit-bench && make krukit-v5-hard` (one rep; ≥3 reps before any public number, P3).
 
 **Mechanistic criterion (primary, trace-falsifiable):** in the r1 trajectories of **write-compressor, password-recovery, path-tracing**: (a) a deadline-plan line exists (route-log line or first artifact) AND (b) the first write of the declared deliverable lands in the first half of the agent's used wall-clock. In **torch-tensor-parallelism**: an interpreter-install attempt (apt-get/pip or equivalent) precedes any manual-trace verification claim. **Falsified** if the traces again show no plan and no early deliverable write — that would mean prompt-text cannot carry this behavior and W5 (harness hooks) becomes the primary path.
 

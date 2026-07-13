@@ -7,7 +7,7 @@ Task: Rework Deadline gate from krukit-v4-r1 trace evidence — W1 deadline-plan
 - [x] 4 plan — done 2026-07-13, artifact: plan.md
 - [x] 5 act — done 2026-07-13, artifact: plan.md (T1 red→green T2; T3-T4 committed; T5 uncommitted by design)
 - [x] 6 verify — done 2026-07-13, artifact: verify.md
-- [ ] 7 review
+- [x] 7 review — done 2026-07-13, artifact: flow-state.md
 
 > [auto-answer] Stage-0 route: full — reworks Layer-0 invariant wording (P5, load-bearing) + edits krukit-act/krukit-verify; user approved the W1-W4 plan with "+" but is not steering stage-by-stage (established wave precedent) — 2026-07-13
 > [constitution] v1.1.0, 10 principles — loaded (open mode: existing constitution → no-op)
@@ -28,3 +28,22 @@ Code cross-checks: lint pin `**Deadline gate.**` survives the reword (label kept
 
 Sharpened terms (→ CONTEXT.md in act): **deadline plan** (one line: baseline → escalation rungs → first-write moment), **baseline-first ladder** (cheapest verifiable end-to-end deliverable secured on disk first, then climb). Stress-tests passed: quick tasks (self-scoped, inert), early finish with verification passed (legal), interactive long tasks (plan rides route-log/first artifact). No ADR (recorded here; reversible).
 
+
+## Review summary (2026-07-13)
+Independent fresh-context review of 25173f4..HEAD: **0 Critical / 2 Important / 7 Minor**. Reviewer independently re-proved red→green via `git archive c12f1f1` (exactly the 4 predicted errors) and probed pin sensitivity with 3 break-mutations; verified P2 (+158 B replace-not-add), P5 survivors, bench freeze (v3/v4), and design↔code verbatim.
+
+Resolutions (every finding, on merits):
+- **I-1 FIXED** — early-exit via rung-local self-chosen verification on open-ended work: exit now binds to "the task's own declared success criteria — open-ended or scored work has no early pass" (commit 0-of-day: see log). Same loophole class W3 targeted; leaving it half-closed would waste the paid probe run.
+- **I-2 FIXED** — "budget remains" undecidable in-run: default polarity added, "(assume it does unless the harness says otherwise)". Same commit as I-1 (one clause).
+- **M-1 DECLINED** — "plan as if minutes" misread as stopping rule: the actionable misreading is already closed by I-2's default; the proposed aphorism is redundant bytes (P2).
+- **M-2 FIXED** — restored "(marked partial while incomplete)" dropped by the rewrite (never-fabricate hygiene; P5-adjacent regression the design missed).
+- **M-3 FIXED** — flow clause pins scoped to the bullet line (presence AND placement); sensitivity re-probed. Act/verify pins stay file-scoped (single occurrence, no siblings) per reviewer's own condition.
+- **M-4 RECORDED** — deadline-plan home elastic on full route / undefined pre-routing: watch item bound to v5 trace inspection; if plan lines are vacuous, pin the home to the approach-committing artifact (next wave, P6 needs the trace).
+- **M-5 RECORDED** — baseline-first vs TDD iron law unarbitrated: named watch item for the v5 run (reviewer agrees P6 requires a trace first).
+- **M-6 DECLINED (deferred)** — conditions/krukit-v5.md gate-evidence format conflicts with the skill's [auto-answer] contract: inherited verbatim from v3/v4; editing v5's condition file now would break v3↔v5 comparability for a conflict the prediction does not key on. Fix in the next condition GENERATION.
+- **M-7 FIXED (disclosure + process fix)** — v4 vendored dirty (3 gitignored IMPROVE-LOG.md riders): disclosed in vendor/PINS.txt (v4 untouched per P9; v3 verified rider-free); v5 re-vendored via `git archive` at final HEAD 493e5d1 — byte-identical, rider-free; vendoring method noted in PINS.txt for future waves.
+
+Branch outcome: work on main (established wave pattern), final lint green, NOTHING pushed. Reviewer's overall: "execution quality is high… recommend shipping as-is for the v5 probe run" — Important findings fixed anyway (cheap, and the probe is paid).
+> [auto-answer] branch options: keep on main as committed, no push — autonomous mode; matches all prior wave precedent — 2026-07-13
+> [auto-answer] constitution close: NO amendment — the wave refines Layer-0 content already protected by P5; no new project-wide principle emerged (honest common case per krukit-rules) — 2026-07-13
+Knowledge capture: no .valis.json in repo → Valis capture skipped silently (per skill contract).
