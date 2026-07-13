@@ -70,6 +70,16 @@ for skill_md in sorted(SKILLS.glob("*/SKILL.md")):
         # bullet text is not covered by the heading pins above — pin the Deadline-gate invariant explicitly
         if "**Deadline gate.**" not in text:
             err(skill_md, "missing pinned Layer-0 bullet '**Deadline gate.**' (deadline-aware-execution)")
+        # the label alone can't prove the v2 rewrite — pin its two load-bearing clauses
+        for needle in ("deadline plan", "never an exit"):
+            if needle not in text:
+                err(skill_md, f"missing pinned Deadline-gate clause '{needle}' (deadline-gate-v2)")
+    if skill_md.parent.name == "krukit-act":
+        if "part of the task, not a blocker" not in text:
+            err(skill_md, "missing pinned environment rule 'part of the task, not a blocker' (deadline-gate-v2)")
+    if skill_md.parent.name == "krukit-verify":
+        if "recorded as unverified" not in text:
+            err(skill_md, "missing pinned manual-trace rule 'recorded as unverified' (deadline-gate-v2)")
 
 # route-name consistency: flow route table == Invariants enumeration == README enumeration
 flow_text = (SKILLS / "krukit-flow" / "SKILL.md").read_text()
