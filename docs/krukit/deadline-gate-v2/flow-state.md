@@ -3,8 +3,8 @@ Started: 2026-07-13 | Route: full | Mode: autonomous
 Task: Rework Deadline gate from krukit-v4-r1 trace evidence — W1 deadline-plan checkpoint, W2 baseline-first ladder, W3 close partial-loophole, W4 environment rule (act/verify); W5 harness-hooks recorded as note only
 - [x] 1 recon — done 2026-07-13, artifact: context.md
 - [x] 2 grill — done 2026-07-13, artifact: flow-state.md
-- [ ] 3 design
-- [ ] 4 plan
+- [x] 3 design — done 2026-07-13, artifact: design.md
+- [x] 4 plan — done 2026-07-13, artifact: plan.md
 - [ ] 5 act
 - [ ] 6 verify
 - [ ] 7 review
