@@ -10,13 +10,16 @@ MUST NOT break (context.md Invariants):
 
 ## Tasks
 
-- [ ] **T1 — lint pins (RED).** Modify `scripts/lint-consistency.py`: extend krukit-flow branch with `for needle in ("deadline plan", "never an exit")` check; add `krukit-act` branch pinning `part of the task, not a blocker`; add `krukit-verify` branch pinning `recorded as unverified` (exact code in design.md). Test: run lint, expect exit 1 with EXACTLY 4 new errors (2 flow, 1 act, 1 verify) and no others. Commit (red).
-- [ ] **T2 — skill edits (GREEN).** Replace the Deadline-gate bullet in `skills/krukit-flow/SKILL.md:16` with design's normative text; append the environment sentence to act step 4 iron-law paragraph; append the manual-trace clause to verify step 2 main paragraph (both normative texts in design.md). Test: lint exit 0, `OK: 11 skills`. One logical change (the four pins turn green together). Commit; message carries the P2 cost line (+158 B flow, +1 sentence act, +1 clause verify).
-- [ ] **T3 — CONTEXT.md glossary.** Reword line 9 (`**deadline gate**`) to ladder semantics; add `**deadline plan**` and `**baseline-first ladder**` entries (texts in design.md). Test: lint still green; grep shows the three entries. Commit.
-- [ ] **T4 [mechanical] — old-wave outcome addendum.** Append the v4-r1 outcome paragraph after the attribution-confound paragraph in `docs/krukit/deadline-aware-execution/verify.md` (content per design: aborted 3/10 at 0.0, trace-level falsification, superseded by deadline-gate-v2). Test: section reads Setup → criterion → caveat → confound → outcome. Commit.
-- [ ] **T5 [mechanical] — W5 note, NO COMMIT.** Append `### 15. Harness-level time triggers (hook/heartbeat) — deadline-gate-v2 finding` to HARNESS-IMPROVEMENTS-DRAFT.md (content per design). Test: file remains untracked (`git status` shows `??`).
+- [x] **T1 — lint pins (RED).** Modify `scripts/lint-consistency.py`: extend krukit-flow branch with `for needle in ("deadline plan", "never an exit")` check; add `krukit-act` branch pinning `part of the task, not a blocker`; add `krukit-verify` branch pinning `recorded as unverified` (exact code in design.md). Test: run lint, expect exit 1 with EXACTLY 4 new errors (2 flow, 1 act, 1 verify) and no others. Commit (red).
+- [x] **T2 — skill edits (GREEN).** Replace the Deadline-gate bullet in `skills/krukit-flow/SKILL.md:16` with design's normative text; append the environment sentence to act step 4 iron-law paragraph; append the manual-trace clause to verify step 2 main paragraph (both normative texts in design.md). Test: lint exit 0, `OK: 11 skills`. One logical change (the four pins turn green together). Commit; message carries the P2 cost line (+158 B flow, +1 sentence act, +1 clause verify).
+- [x] **T3 — CONTEXT.md glossary.** Reword line 9 (`**deadline gate**`) to ladder semantics; add `**deadline plan**` and `**baseline-first ladder**` entries (texts in design.md). Test: lint still green; grep shows the three entries. Commit.
+- [x] **T4 [mechanical] — old-wave outcome addendum.** Append the v4-r1 outcome paragraph after the attribution-confound paragraph in `docs/krukit/deadline-aware-execution/verify.md` (content per design: aborted 3/10 at 0.0, trace-level falsification, superseded by deadline-gate-v2). Test: section reads Setup → criterion → caveat → confound → outcome. Commit.
+- [x] **T5 [mechanical] — W5 note, NO COMMIT.** Append `### 15. Harness-level time triggers (hook/heartbeat) — deadline-gate-v2 finding` to HARNESS-IMPROVEMENTS-DRAFT.md (content per design). Test: file remains untracked (`git status` shows `??`).
 
 Stage-6 (verify) owns: fresh full-lint evidence, verbatim-bullet check, bench condition krukit-v5 (vendor at final HEAD, PINS.txt, run.sh/Makefile/status.py wiring) + the two-tier pre-registered prediction.
 
 ## Self-review
 Spec coverage: DoD1→T2, DoD2→T1+T2, DoD3→T2, DoD4→T3, DoD5→T4, DoD6→T5, DoD7→stage 6 (by design). No placeholders; all task texts resolve to normative snippets in design.md. Types n/a (prose + one Python loop).
+
+## Learnings
+- Old-wave verify.md ends with a `## Gate` section — outcome addenda go BEFORE it (recon agent reported the confound paragraph as end-of-file; it is not).
