@@ -67,6 +67,9 @@ for skill_md in sorted(SKILLS.glob("*/SKILL.md")):
         for section in ("## Invariants (all routes)", "## Autonomous mode"):
             if section not in text:
                 err(skill_md, f"missing pinned section '{section}'")
+        # bullet text is not covered by the heading pins above — pin the Deadline-gate invariant explicitly
+        if "**Deadline gate.**" not in text:
+            err(skill_md, "missing pinned Layer-0 bullet '**Deadline gate.**' (deadline-aware-execution)")
 
 # route-name consistency: flow route table == Invariants enumeration == README enumeration
 flow_text = (SKILLS / "krukit-flow" / "SKILL.md").read_text()
