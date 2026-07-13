@@ -37,6 +37,8 @@ Metrics: requirements 5 (design DoD) / implemented 5 / findings 4 (0 CRITICAL, 0
 
 **Honest caveat:** the whole diagnosis is n=2 on 3 tasks. This wave IS the n=3 probe of whether the timeout pattern even reproduces. If the flappy-3 pass or timeout-with-reward>0 in r1 of v4, the mechanism is supported (still needs r2/r3). If they time out empty again, the deadline-gate wording did not change behavior and the wave is falsified — that is an acceptable, informative outcome, not a failure to hide.
 
+**Attribution confound (review finding I-1, recorded 2026-07-13):** v4 is vendored cumulatively at HEAD, so vs v3 (@0f6a63c) it carries not only the deadline gate but also the wave-2 review-close edit to krukit-act/SKILL.md (377670e, Learnings-gate wording). A v3→v4 reward delta is therefore NOT attributable to the deadline gate alone. The specific pre-registered criterion above is largely immune (it keys on timeout-trials materializing a deliverable, which the krukit-act wording doesn't touch), but any broader "v4 beats v3" claim must carry this footnote. Mirrored in krukit-bench vendor/PINS.txt.
+
 ## Gate
 - [x] Full test suite (lint) ran fresh, output read, passing (exit 0, 11 skills).
 - [x] verify.md exists with findings table + metrics line.
