@@ -70,9 +70,11 @@ for skill_md in sorted(SKILLS.glob("*/SKILL.md")):
         # bullet text is not covered by the heading pins above — pin the Deadline-gate invariant explicitly
         if "**Deadline gate.**" not in text:
             err(skill_md, "missing pinned Layer-0 bullet '**Deadline gate.**' (deadline-aware-execution)")
-        # the label alone can't prove the v2 rewrite — pin its two load-bearing clauses
+        # the label alone can't prove the v2 rewrite — pin its two load-bearing clauses INSIDE the bullet
+        bullet_m = re.search(r"^- \*\*Deadline gate\.\*\*.*$", text, re.M)
+        bullet_line = bullet_m.group(0) if bullet_m else ""
         for needle in ("deadline plan", "never an exit"):
-            if needle not in text:
+            if needle not in bullet_line:
                 err(skill_md, f"missing pinned Deadline-gate clause '{needle}' (deadline-gate-v2)")
     if skill_md.parent.name == "krukit-act":
         if "part of the task, not a blocker" not in text:
