@@ -76,6 +76,16 @@ for skill_md in sorted(SKILLS.glob("*/SKILL.md")):
         for needle in ("deadline plan", "never an exit"):
             if needle not in bullet_line:
                 err(skill_md, f"missing pinned Deadline-gate clause '{needle}' (deadline-gate-v2)")
+        # finish-discipline (krukit-v4-r1 full-run traces): literal output check + background ownership
+        if "**Literal-spec check.**" not in text:
+            err(skill_md, "missing pinned Layer-0 bullet '**Literal-spec check.**' (finish-discipline)")
+        spec_m = re.search(r"^- \*\*Literal-spec check\.\*\*.*$", text, re.M)
+        spec_line = spec_m.group(0) if spec_m else ""
+        for needle in ("bare value", "success command"):
+            if needle not in spec_line:
+                err(skill_md, f"missing pinned Literal-spec clause '{needle}' (finish-discipline)")
+        if "not for responsibility" not in bullet_line:
+            err(skill_md, "missing pinned Deadline-gate clause 'not for responsibility' (finish-discipline)")
     if skill_md.parent.name == "krukit-act":
         if "part of the task, not a blocker" not in text:
             err(skill_md, "missing pinned environment rule 'part of the task, not a blocker' (deadline-gate-v2)")
