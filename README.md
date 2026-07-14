@@ -2,7 +2,41 @@
 
 A disciplined, brownfield-first feature pipeline for Claude Code: **recon → grill → design → plan → act → verify → review**, orchestrated end-to-end by `/krukit-flow` with stage gates, lossless resume, a living project constitution, and a trace-driven self-improvement loop.
 
-> **Status: PRIVATE / work-in-progress.** Not ready for public release. See `ROADMAP.md`.
+> **Status: early public release.** Built and used daily by the author; rough edges expected — feedback is the point. See `ROADMAP.md`.
+
+## How it compares
+
+```mermaid
+---
+config:
+  theme: base
+  themeVariables:
+    cScale0: "#2a78d6"
+    cScale1: "#008300"
+    cScale2: "#1baf7a"
+    cScale3: "#eda100"
+    radar:
+      curveOpacity: 0.12
+      graticuleColor: "#c3c2b7"
+      axisColor: "#898781"
+---
+radar-beta
+  title Framework profiles (1-10, higher is better)
+  axis sv["Self-verification"], zr["Zero rework"], lr["Lossless resume"], ho["Hands-off"], fp["First-pass"]
+  axis ad["Artifact durability"], vs["Versatility"], te["Token efficiency"], sl["Speed / low ceremony"], ee["Ease of entry"]
+  curve k["krukit-flow"]{9, 9, 9, 8, 8, 8, 6, 6, 5, 6}
+  curve p["pocock"]{3, 4, 2, 4, 5, 3, 8, 9, 9.5, 9}
+  curve s["superpowers"]{7, 7, 4, 6, 7, 4, 9, 7, 7, 8}
+  curve g["spec-kit"]{6, 8, 7, 7, 8, 10, 4, 4, 3, 5}
+  max 10
+  min 0
+  graticule polygon
+```
+
+Higher is better on every axis (scale 1-10, absolute). Scores are the author's calibrated judgment from daily use of all four frameworks — not telemetry (no framework publishes head-to-head numbers; telemetry is on the roadmap). "Speed" and "low ceremony" are merged because they correlated perfectly across all four tools; "lossless resume" measures whether an interrupted pipeline resumes without losing state (`flow-state.md`).
+
+The contours have different *shapes*, not different sizes: krukit-flow and pocock are near-perfect opposites. Each framework optimizes for a different price of error. Krukit's bet: buy self-verification and zero-rework with ceremony, then use routing to avoid paying that ceremony on small tasks.
+
 
 ## What it is
 
@@ -14,6 +48,15 @@ The design was hardened against **12 pain points** collected from the public Git
 
 - **Model:** the `full` route needs a Sonnet-class or stronger model. Below that bar the router caps the route at `fix` in autonomous runs and warns in interactive ones — weaker models misroute and rubber-stamp verification in our bench traces.
 - **Harness:** a skills-capable Claude Code (or compatible) harness with arrow-key questions (`AskUserQuestion`) for interactive gates. Headless runs use autonomous mode (see krukit-flow).
+
+## Install
+
+```bash
+git clone https://github.com/Todmy/krukit-flow
+cp -r krukit-flow/skills/* ~/.claude/skills/
+```
+
+Restart Claude Code, then run `/krukit-flow` on any feature task. The router will size the pipeline to the task — small changes stay small.
 
 ## Skills
 
@@ -52,6 +95,14 @@ Pains collected from the public issue trackers of six workflow tools (spec-kit, 
 - **Silent gate approvals.** "Did the user actually approve this?" gets answered by the model, not the user.
 
 Krukit's takes: a brownfield recon pass *before* any design, a reopen rule so verification can send you back with the design and plan updated, gate approvals that require a real quoted user reply, and routing that keeps small changes small instead of forcing full ceremony.
+
+## Feedback
+
+This is an early release and your experience report is the most valuable thing you can give it. [Open an issue](https://github.com/Todmy/krukit-flow/issues) with:
+
+- what broke or confused you,
+- what felt heavier than it should,
+- what you'd steal for your own workflow.
 
 ## License
 
